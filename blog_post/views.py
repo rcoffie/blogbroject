@@ -1,0 +1,54 @@
+from django.shortcuts import render,redirect,HttpResponseRedirect
+from .models import *
+from .forms import *
+from django.urls import reverse
+
+# Create your views here.
+
+
+def Home(request):
+  posts = Post.objects.all().order_by('-created')
+ 
+  context = {
+    'posts':posts,
+   
+  }
+  
+  return render(request,'post/index.html',context)
+
+
+
+def blog_category(request, category):
+  posts = Post.objects.filter(
+    categories__name__contains=category
+  ).order_by('-created')
+  context = {
+    'category':category,
+    'posts':posts
+  }
+  
+  return render(request,'post/blog_category.html',context)
+
+
+
+def blog_detail(request, id):
+  post = Post.objects.get(id=id)
+  form = CommentForm()
+  if request.method == 'POST':
+    form = CommentForm(request.POST)
+    if form.is_valid():
+      comment = Comment(
+      body = form.cleaned_data.get('body'),
+      author = request.user ,
+      post = post 
+    )
+    comment.save()
+    return HttpResponseRedirect(reverse('blog_post:blog_detail', args=[post.id]))
+  comments = Comment.objects.filter(post=post)
+  context = {
+    'post':post,
+    'comments':comments,
+    'form':form,
+  }
+  
+  return render(request,'post/blog_detail.html',context)

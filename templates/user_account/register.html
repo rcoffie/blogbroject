@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <form action="" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary "> Sign Up</button>
+        {% if form.errors %}
+        {% for field in field.errors %}
+        {% for errors in field.errors %}
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>opps!</strong> {{error}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        {% endfor%}
+        {% endfor %}
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
