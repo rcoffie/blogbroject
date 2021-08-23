@@ -36,6 +36,7 @@ class Post(models.Model):
 class Comment(models.Model):
   author = models.ForeignKey(Account, on_delete=models.CASCADE)
   body   = models.TextField()
+  reply  = models.ForeignKey('self',null=True,related_name="replies",on_delete=models.CASCADE)
   created = models.DateTimeField(auto_now_add=True)
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
   

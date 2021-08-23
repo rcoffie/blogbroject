@@ -31,7 +31,7 @@ def blog_category(request, category):
 
 
 
-def blog_detail(request, id):
+''' def blog_detail(request, id):
   post = Post.objects.get(id=id)
   form = CommentForm()
   if request.method == 'POST':
@@ -40,7 +40,9 @@ def blog_detail(request, id):
       comment = Comment(
       body = form.cleaned_data.get('body'),
       author = request.user ,
-      post = post 
+      post = post,
+      reply = request.POST.get('comment_id'),
+     
     )
     comment.save()
     return HttpResponseRedirect(reverse('blog_post:blog_detail', args=[post.id]))
@@ -51,4 +53,26 @@ def blog_detail(request, id):
     'form':form,
   }
   
+  return render(request,'post/blog_detail.html',context)
+ '''
+def blog_detail(request, id):
+  post = Post.objects.get(id=id)
+  form = CommentForm()
+  if request.method == 'POST':
+    form = CommentForm(request.POST)
+  if form.is_valid():
+    body = request.POST.get('body')
+    reply_id = request.POST.get('comment_id')
+    comment_qs = None 
+    if reply_id:
+      comment_qs = Comment.objects.get(id=reply_id)
+    comment = Comment.objects.create(post=post,body=body,author=request.user,reply=comment_qs)
+    comment.save()
+    return HttpResponseRedirect(reverse('blog_post:blog_detail', args=[post.id]))
+  comments = Comment.objects.filter(post=post,reply=None)
+  context = {
+    'post':post,
+    'comments':comments,
+    'form':form,
+  }
   return render(request,'post/blog_detail.html',context)
