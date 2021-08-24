@@ -64,10 +64,14 @@
                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                     <div class="ms-3">
                         <div class="fw-bold">{{ comment.author.username|capfirst }}</div>
-                        {{ comment.body }}
+                        {{ comment.body }} 
+                        <button type="button" class="reply-btn btn btn-dark btn-sm "> <i class="bi bi-reply"> Reply   </i> </button>
                         
-                        <div class="replied-comments container mt-2">
-                            <div class="form-group row">
+                        
+
+                        
+                        <div class="replied-comments container mt-2 " style="display:none" >
+                            <div class="form-group row ">
 
                                 <form class="mb-4 p-4" action="" method="POST">
                                     {% csrf_token %}
