@@ -45,3 +45,5 @@ def DeletePost(request, id):
   post = Post.objects.get(id=id)
   post.delete()
   return redirect('author_dashboard:home')
+
+

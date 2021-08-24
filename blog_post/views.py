@@ -76,3 +76,14 @@ def blog_detail(request, id):
     'form':form,
   }
   return render(request,'post/blog_detail.html',context)
+
+
+
+def Search(request):
+  posts = Post.objects.all()
+  query = request.GET.get('q')
+  if query:
+    posts = Post.filter(title__icontains=query)
+    
+  content = {'posts':posts}
+  return render(request,'post/search.html',content)
