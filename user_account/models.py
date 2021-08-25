@@ -50,3 +50,15 @@ class Account(AbstractBaseUser,PermissionsMixin):
   def __str_(self):
     return self.username
   
+  
+  
+
+
+class Profile(models.Model):
+  user = models.OneToOneField(Account,on_delete=models.CASCADE)
+  profile_picture = models.ImageField(default='profile_pics/prof.png',upload_to='profile_pics',null=True,blank=True)
+  
+  
+  def __str__(self):
+    return self.user.username
+  

@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,HttpResponseRedirect
 from .models import *
 from .forms import *
 from django.urls import reverse
+from django.db.models import Q
 
 # Create your views here.
 
@@ -83,7 +84,11 @@ def Search(request):
   posts = Post.objects.all()
   query = request.GET.get('q')
   if query:
-    posts = Post.filter(title__icontains=query)
+    posts = Post.objects.all().filter(
+      Q(title__icontains=query)|
+      Q(body__icontains=query)
+      
+    )
     
   content = {'posts':posts}
   return render(request,'post/search.html',content)

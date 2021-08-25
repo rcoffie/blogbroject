@@ -29,10 +29,12 @@
             </a>&nbsp;
 
              {% endfor %}
-            
-        </header>
+             
+         
         <!-- Preview image figure-->
         <figure class="mb-4"><img class="img-fluid rounded" src="{{ post.image.url }}" alt="..." /></figure>
+        <!-- POST Author -->
+        <span class="badge bg-dark  m-2"> Author: {{ post.created_by.username|capfirst }} </span> 
         <!-- Post content-->
         <section class="mb-5">
             <p class="fs-5 mb-4">{{ post.body  }}</p>
