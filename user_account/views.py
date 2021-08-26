@@ -37,3 +37,10 @@ def Login(request):
         return redirect('blog_post:home')
   context = {'form':form}
   return render(request,'user_account/login.html',context)
+
+
+
+
+def UserLogout(request):
+  logout(request)
+  return redirect('blog_post:home')

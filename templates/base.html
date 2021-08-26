@@ -52,8 +52,43 @@
             <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search" required>
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
+         
+
         </div>
+        
       </div>
+      {% if request.user.is_authenticated %}
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+        Dashboard
+        </button> </p>  
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+          <li><a href="" class="dropdown-item" type="button">Action</a></li>
+          <li><a href="{% url 'user_account:logout' %}" class="dropdown-item" type="button">Logout</a></li>
+          <li><a href="" class="dropdown-item" type="button">Something else here</a></li>
+        </ul>
+      </div>
+      {% else %}
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'user_account:login' %}">  Login <i class="bi bi-door-open"></i> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user_account:register' %}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        
+        
+        
+      </ul>
+     
+
+      {% endif %}
+      
+     
     </nav>
 
 
