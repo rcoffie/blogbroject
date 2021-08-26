@@ -6,10 +6,12 @@ from django.views import generic
 from django.views.generic import CreateView,UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 
-
+@method_decorator(login_required,name='dispatch')
 class CreatePost(CreateView):
   model = Post
   form_class = PostForm
@@ -21,7 +23,7 @@ class CreatePost(CreateView):
       return super().form_valid(form)
   
   
-
+@method_decorator(login_required,name='dispatch')
 class EditPost(UpdateView):
   model = Post
   form_class = PostForm
@@ -31,7 +33,7 @@ class EditPost(UpdateView):
   success_url  = reverse_lazy('author_dashboard:home')
   
   
-
+@login_required
 def Home(request):
   
   posts = Post.objects.all()
