@@ -75,9 +75,13 @@
                         <div x-data="{open:false }" class="replied-comments container mt-2 "  >
                             <div @click="open = ! open " class="form-group row ">
                                 <button type="button" class="btn btn-link text-decoration-none link-secondary"> <i class="bi bi-chat"></i> Reply</button>
-                               
+                              <div> {{ comment.replies.all.count }} <i class=" mt-2 bi bi-chat-left"></i> </div>   
 
-                                <form x-show="open" class="mb-4 p-4" action="" method="POST">
+                                <form x-show="open"
+                                
+                                class="mb-4 p-4" action="" method="POST"
+                               
+                                >
                                     {% csrf_token %}
                                     <input type="hidden" name="comment_id" value="{{ comment.id }}">
                                     {{ form }}
@@ -97,7 +101,7 @@
 
 
                         <!-- Child comment 1-->
-                        {{ comment.replies.all.count }} <i class=" mt-2 bi bi-chat-left"></i>
+                       
                         {% for reply in comment.replies.all %}
                         <div class="d-flex mt-4">
                             <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
