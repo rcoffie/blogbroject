@@ -36,7 +36,7 @@ class EditPost(UpdateView):
 @login_required
 def Home(request):
   
-  posts = Post.objects.all()
+  posts = Post.objects.all().filter(created_by =request.user)
   context = {'posts':posts}
   
   return render(request,'author_dashboard/home.html',context)

@@ -47,3 +47,18 @@ class LoginForm(forms.Form):
         raise forms.ValidateError("invalid login check your credentials ")
 
 
+
+class ProfileUpdateForm(forms.ModelForm):
+  class Meta:
+    model = Profile 
+    fields = ['body','twitter','facebook','github','profile_picture']
+    
+    
+    
+    
+class UserUpdateForm(forms.ModelForm):
+  email = forms.EmailField()
+  
+  class Meta:
+    model = Account 
+    fields = ['username','email']

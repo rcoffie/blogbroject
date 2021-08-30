@@ -56,6 +56,10 @@ class Account(AbstractBaseUser,PermissionsMixin):
 
 class Profile(models.Model):
   user = models.OneToOneField(Account,on_delete=models.CASCADE)
+  body = models.TextField(blank=True,null=True)
+  twitter = models.URLField(blank=True,null=True, )
+  facebook = models.URLField(blank=True,null=True)
+  github = models.URLField(blank=True,null=True)
   profile_picture = models.ImageField(default='profile_pics/prof.png',upload_to='profile_pics',null=True,blank=True)
   
   
