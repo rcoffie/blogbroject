@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <form action="">
+        {% csrf_token %}
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+        <input type="submit" class="btn btn-primary m-2" value="update profile" name="">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
