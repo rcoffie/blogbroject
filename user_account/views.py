@@ -5,6 +5,7 @@ from .forms import LoginForm
 from django.contrib import messages,auth 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from blog_post . models import *
 # Create your views here.
 
 
@@ -64,3 +65,6 @@ def EditProfile(request):
   }
   
   return render(request,'user_account/profile_edit.html',context)
+
+
+

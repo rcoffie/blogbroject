@@ -28,9 +28,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'blog_post:home' %}">Home</a>
             </li>
-            <li class="nav-item">
+           <!--  <li class="nav-item">
               <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item dropdown">
@@ -43,10 +43,8 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
+            </li> -->
+            
           </ul>
           <form action="{% url 'blog_post:search' %}" class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search" required>
@@ -60,10 +58,10 @@
       {% if request.user.is_authenticated %}
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-        Dashboard
+        {{ request.user.username|capfirst }}
         </button> </p>  
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-          <li><a href="" class="dropdown-item" type="button">Action</a></li>
+          <li><a href="{% url 'author_dashboard:home' %}" class="dropdown-item" type="button">Dashboard</a></li>
           <li><a href="{% url 'user_account:logout' %}" class="dropdown-item" type="button">Logout</a></li>
           <li><a href="" class="dropdown-item" type="button">Something else here</a></li>
         </ul>

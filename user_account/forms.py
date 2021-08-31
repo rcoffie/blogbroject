@@ -44,7 +44,7 @@ class LoginForm(forms.Form):
       email = self.cleaned_data['email']
       password = self.cleaned_data['password']
       if not authenticate(email=email, password=password):
-        raise forms.ValidateError("invalid login check your credentials ")
+        raise forms.ValidationError("invalid login check your credentials ")
 
 
 

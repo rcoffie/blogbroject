@@ -8,4 +8,6 @@ urlpatterns = [
    path('login/',views.Login,name='login'),
    path('logout/',views.UserLogout,name='logout'),
    path('profile_edit/',views.EditProfile,name='profile_edit'),
+  
+ 
 ]

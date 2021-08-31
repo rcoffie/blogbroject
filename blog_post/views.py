@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django.urls import reverse
 from django.db.models import Q
+from user_account .models import *
 
 # Create your views here.
 
@@ -32,32 +33,10 @@ def blog_category(request, category):
 
 
 
-''' def blog_detail(request, id):
-  post = Post.objects.get(id=id)
-  form = CommentForm()
-  if request.method == 'POST':
-    form = CommentForm(request.POST)
-    if form.is_valid():
-      comment = Comment(
-      body = form.cleaned_data.get('body'),
-      author = request.user ,
-      post = post,
-      reply = request.POST.get('comment_id'),
-     
-    )
-    comment.save()
-    return HttpResponseRedirect(reverse('blog_post:blog_detail', args=[post.id]))
-  comments = Comment.objects.filter(post=post)
-  context = {
-    'post':post,
-    'comments':comments,
-    'form':form,
-  }
-  
-  return render(request,'post/blog_detail.html',context)
- '''
+
 def blog_detail(request, id):
   post = Post.objects.get(id=id)
+  
   form = CommentForm()
   if request.method == 'POST':
     form = CommentForm(request.POST)
@@ -75,6 +54,7 @@ def blog_detail(request, id):
     'post':post,
     'comments':comments,
     'form':form,
+   
   }
   return render(request,'post/blog_detail.html',context)
 
