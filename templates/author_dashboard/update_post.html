@@ -8,6 +8,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
+    {% if request.user == post.created_by %}
       <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
@@ -16,6 +17,8 @@
     </div>
   </div>
 </div>
-
+{% else %}
+<p>not your post</p>
+{% endif %}
 
 {% endblock %}

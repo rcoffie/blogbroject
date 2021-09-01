@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django.urls import reverse
 from django.db.models import Q
+from django.core.paginator import Paginator
 from user_account .models import *
 
 # Create your views here.
@@ -10,6 +11,9 @@ from user_account .models import *
 
 def Home(request):
   posts = Post.objects.all().order_by('-created')
+  paginator =  Paginator(posts,6)
+  page_number = request.GET.get('page')
+  posts = paginator.get_page(page_number)
  
   context = {
     'posts':posts,
