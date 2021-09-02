@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.db.models import Q
 from django.core.paginator import Paginator
 from user_account .models import *
+from django.contrib import messages
 
 # Create your views here.
 
@@ -52,6 +53,7 @@ def blog_detail(request, id):
       comment_qs = Comment.objects.get(id=reply_id)
     comment = Comment.objects.create(post=post,body=body,author=request.user,reply=comment_qs)
     comment.save()
+    messages.success(request,'comment added !!!!!')
     return HttpResponseRedirect(reverse('blog_post:blog_detail', args=[post.id]))
   comments = Comment.objects.filter(post=post,reply=None)
   context = {
